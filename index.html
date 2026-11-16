@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>המרחב הלטנטי – איה אילסר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFFFF; --wash:#EAF1F8; --ink:#0F1B2D; --sky:#2D6FD0; --mute:#566579; --line:#CCD8E6;
+  --head:"Secular One","Rubik",Arial,sans-serif;
+  --body:"Assistant","Heebo",Arial,sans-serif;
+  --curve:42%; /* the rounded corner of the White City balcony */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:1.12rem;line-height:1.8}
+.wrap{max-width:66rem;margin:0 auto;padding:0 1.25rem}
+.en{direction:ltr;unicode-bidi:isolate}
+p{max-width:44rem;margin:0 0 1rem}
+a{color:var(--sky);text-underline-offset:.2em}
+h1,h2,h3{font-family:var(--head);font-weight:400;margin:0}
+h2{font-size:clamp(1.8rem,4.5vw,2.8rem);line-height:1.15;margin-bottom:1.25rem}
+h3{font-size:1.5rem;margin:3rem 0 .75rem}
+
+/* hero */
+.hero{background:var(--wash);border-bottom:10px solid var(--ink);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding-top:4rem;padding-bottom:4rem}
+h1{font-size:clamp(3.4rem,11vw,7.5rem);line-height:.95;letter-spacing:-.01em}
+.by{margin:1.5rem 0 0;color:var(--mute);font-size:1.15rem}
+.stack{position:relative;aspect-ratio:1/1;background:var(--white);border-top-left-radius:var(--curve);overflow:hidden;box-shadow:12px 12px 0 var(--ink)}
+.stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stack-ctl{margin-top:2rem;font-size:.95rem;color:var(--mute);max-width:22rem}
+.stack-ctl b{color:var(--ink);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--sky);margin:.4rem 0 0}
+
+/* sections */
+section{padding:4.5rem 0}
+section + section{border-top:1px solid var(--line)}
+.band{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;font-family:var(--head);color:var(--sky);font-size:1.1rem}
+.band::before{content:"";width:3.5rem;height:.85rem;background:var(--sky);border-top-left-radius:1rem}
+.work{display:grid;grid-template-columns:1fr 1.15fr;gap:2.5rem;align-items:start}
+.meta{color:var(--mute);margin:.25rem 0 1rem}
+figure{margin:0}
+figcaption{font-size:.9rem;color:var(--mute);margin-top:.5rem}
+figcaption strong{color:var(--ink)}
+figcaption a{overflow-wrap:anywhere}
+.frame{aspect-ratio:4/3;overflow:hidden;border-top-left-radius:var(--curve)}
+.frame img{display:block;width:100%;height:100%;object-fit:cover}
+.photo{display:block;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in}
+.artworks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25rem;margin-top:2rem}
+.artworks figure,.real figure,.work > *{min-width:0}
+.artworks .frame,.real .frame{border-top-left-radius:0;background:var(--wash)}
+.artworks .frame img,.real .frame img{object-fit:contain}
+#original{aspect-ratio:auto;border-top-left-radius:0}
+#original img{height:auto;object-fit:contain}
+.real figcaption{white-space:pre-line}
+.source-note{font-size:.9rem;color:var(--mute)}
+
+/* part B */
+.prompt{direction:ltr;text-align:left;background:var(--ink);color:var(--white);padding:1.1rem 1.4rem;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1rem;max-width:44rem;margin:1rem 0;border-top-right-radius:1.6rem}
+.grid20{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:1.5rem 0}
+.cell{aspect-ratio:1/1;overflow:hidden;background:var(--wash);padding:0;border:0;cursor:zoom-in;display:block}
+.cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.cell:hover img{transform:scale(1.06)}
+.cell:nth-child(5n+1){border-top-left-radius:40%}
+.real{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:1.25rem;margin:1.5rem 0}
+.tablewrap{overflow-x:auto;margin:1.5rem 0}
+table{border-collapse:collapse;width:100%;min-width:32rem}
+th,td{padding:.7rem .9rem;text-align:right}
+th{background:var(--ink);color:var(--white);font-weight:600}
+td{border-bottom:1px solid var(--line)}
+.todo{color:var(--mute)}
+.answer{background:var(--ink);color:var(--white);padding:2.5rem;border-top-left-radius:var(--curve)}
+.answer p{max-width:42rem;margin:0;font-size:1.2rem}
+.answer h2{margin-bottom:1rem}
+footer{padding:2.5rem 0 4rem;color:var(--mute);font-size:.9rem}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:min(92vw,60rem);max-height:92vh}
+dialog::backdrop{background:rgba(15,27,45,.85)}
+dialog img{display:block;max-width:100%;max-height:85vh;width:auto;height:auto;margin:auto}
+dialog button{position:absolute;top:.5rem;inset-inline-start:.5rem;font:inherit;background:var(--white);border:0;padding:.3rem .8rem;cursor:pointer}
+
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+@media (max-width:48rem){
+  .hero .wrap,.work{grid-template-columns:1fr}
+  .artworks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid20{grid-template-columns:repeat(4,1fr)}
+  .answer{padding:1.75rem}
+}
+@media (prefers-reduced-motion:reduce){.cell img{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>המרחב<br>הלטנטי</h1>
+      <p class="by">מגישה: איה אילסר</p>
+    </div>
+    <div>
+      <div class="stack" id="stack" role="img" aria-label="20 תמונות של בניינים שנוצרו מאותו פרומפט, מוערמות זו על זו לתמונה ממוצעת אחת"></div>
+      <div class="stack-ctl">
+        <label for="n">הבניין הממוצע: <b id="nlabel">20</b> הרצות מוערמות</label>
+        <input type="range" id="n" min="1" max="20" value="20">
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="work"><div class="wrap">
+  <div class="band">העבודה המקורית</div>
+  <div class="work">
+    <div>
+      <h2 class="en">Babylonian Vision</h2>
+      <p class="meta">2020 · Nora Al-Badri</p>
+      <p>עבודה נבחרת מתוך המאמר של אנטוניו סומאיני, <span class="en">“Latent Spaces: AI, Art, and the Archive”</span>.</p>
+    </div>
+    <figure>
+      <div class="frame" id="original"></div>
+      <figcaption>Nora Al-Badri, <span class="en">Babylonian Vision</span>, 2020. פריים מתוך וידאו. © באדיבות האמנית. <a href="https://www.nora-al-badri.de/works-index#babylonian-vision">הפרויקט באתר האמנית</a> · <a href="https://www.schirn.de/en/schirnmag/3-fragen-an-nora-al-badri/">מקור הדימוי והקרדיט: SCHIRN</a>.</figcaption>
+    </figure>
+  </div>
+  <div class="artworks" id="artworks" aria-label="דימויים נוספים מתוך הקבצים שנמסרו"></div>
+  <p class="source-note">לחיצה על כל דימוי פותחת את התמונה המלאה. הדימויים הנוספים הועלו מהתיקייה שנמסרה; אין לייחס לכולם את שם העבודה ושנת היצירה של הרפרנס.</p>
+</div></section>
+
+<section id="part-a"><div class="wrap">
+  <div class="band">חלק א׳</div>
+  <h2>תגובה אישית לעבודה</h2>
+  <p>העבודה משתמשת בארכיון של תצלומי חפצים מבבל מאוספי מוזיאונים מערביים, שרבים מהם הגיעו בתקופה הקולוניאלית. לפי סומאיני, היא משתמשת בתמונות שנוצרו על ידי GAN כדי <span class="en">“to highlight and undermine the colonial dimensions”</span> של האוספים האלה, כלומר להבליט ולערער את ההיבטים הקולוניאליים שלהם. מה שחסר בדאטה סט הוא כל מה שלא נכנס לארכיון: ההקשר המקורי של החפצים, הקהילות שהם נלקחו מהן, והחפצים שאבדו או נבזזו. מה שנשאר הוא רק מה שנאסף, צולם ונסרק.</p>
+  <p>המרחב הלטנטי חושף כאן אפשרות. ה-GAN לומד את הגיאומטריה של הארכיון ומייצר בתוכה "חפצים אפשריים", היברידיים ומשתנים, שמעולם לא היו קיימים. הוא מעלים את מקור האובייקטים ואת הזכות לספר עליהם: התוצר הסטטיסטי מטשטש את העובדה שהחפץ אינו נייטרלי, ושהדאטה סט ירש את הבחירות של מי שאסף. המרחב הלטנטי למעשה חושף שהארכיון הוא רק אחד מהעברים האפשריים. הוא מעלים את הסיפור של איך הארכיון נוצר.</p>
+  <p>האסטרטגיה קרובה ביותר לסירוב לפי דעתי. העבודה לא מנסה "לשחזר" את הארכיון כפי שהוא, אלא דוחה את הסמכות של האוסף ואת סדר הסיווג שלו. יש בה גם מרכיב של גליץ', כי ההזיות של המודל מערערות את הדימוי "הנקי" של המוזיאון.</p>
+  <p>כן אוסיף ואומר שהמאמר מלמד גם שלא קיים מרחב לטנטי אחד של תרבות, ושכל מודל מאומן על חלקים אחרים של האינטרנט, ולכן הוא מגלם הטיות אחרות. הרעיון הזה עוזר להסביר למה "ארכיון" אינו נייטרלי.</p>
+</div></section>
+
+<section id="part-b"><div class="wrap">
+  <div class="band">חלק ב׳</div>
+  <h2>יצירה בעקבות העבודה</h2>
+  <p><strong>ארכיון נבחר:</strong> ארכיון העיר הלבנה, תל אביב.</p>
+  <p><strong>האסטרטגיה: חשיפה.</strong> בחלק א׳ קראתי את <span class="en">Babylonian Vision</span> כאסטרטגיה של סירוב עם יסוד של גליץ׳: העבודה מייצרת חפצים חדשים ומשבשת את הסדר של האוסף. אני הפוכה לה. אני לא מייצרת משהו חדש אלא מציגה את מה שהמודל מייצר כשאין מי שמפריע לו, ובכך חושפת את הממוצע שבדרך כלל נשאר בלתי נראה.</p>
+
+  <h3>המהלך והכלי</h3>
+  <p>המהלך: "הממוצע". אותו פרומפט, ללא שינוי, הורץ 20 פעמים, בכל פעם כיצירה נפרדת. הכלי: <span class="en">Gemini</span>. גרסת המודל ותאריך ההרצות לא נמסרו.</p>
+  <div class="prompt">Generate an image of a building in the White City of Tel Aviv.</div>
+
+  <h3>20 הרצות של אותו פרומפט</h3>
+  <p class="todo">לחיצה על תמונה מגדילה אותה.</p>
+  <div class="grid20" id="grid20"></div>
+
+  <h3>מה חוזר ומה חסר</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>אלמנט</th><th>בכמה תמונות מתוך 20</th><th>נמצא גם במבנים האמיתיים?</th></tr></thead>
+      <tbody>
+        <tr><td>קירות לבנים או בהירים</td><td>20 מתוך 20</td><td>כן, לצד הבדלים בגוון, בחומר ובמצב התחזוקה.</td></tr>
+        <tr><td>מרפסות מעוגלות</td><td>17 מתוך 20</td><td>כן, למשל בבית האונייה ובבית ביגלמן; לא בכל מבנה.</td></tr>
+        <tr><td>חלונות סרט</td><td>לפחות 2 מתוך 20</td><td>כן, למשל בבית פולישוק. יש להבחין בין חלון רציף לבין מעקה מרפסת.</td></tr>
+        <tr><td>שמיים כחולים או תכולים</td><td>20 מתוך 20</td><td>מופיעים בחלק מתצלומי הצבע; זהו תנאי צילום, לא מאפיין אדריכלי.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="source-note">ספירה חזותית של 20 הדימויים המוצגים, לא מדידה אוטומטית: מרפסות בעלות פינה מעוגלת ברורה נספרו בכל התמונות פרט ל־2, 6 ו־19. בחלונות הסרט צוינו רק שתי הדוגמאות המובהקות בתמונות 3 ו־11; שאר המקרים לא סווגו בוודאות.</p>
+  <p>התוצרים חוזרים על בניין בהיר, מרפסות אופקיות, פינת רחוב וצמחייה. בחלקם מופיעים שלטים שאינם קריאים דיים כדי לזהות מקום. אף תוצר אינו מספק זיהוי מאומת של המבנה, כתובתו, שנת בנייתו והאדריכל שלו. מול התצלומים האמיתיים מתבלט ההבדל בין דימוי של סגנון לבין תיעוד של בניין מסוים: "הבניין הממוצע" מאחד צורות חוזרות, אבל אינו תחליף למקור היסטורי.</p>
+
+  <h3>תצלומים אמיתיים של העיר הלבנה</h3>
+  <p>נקודת ההשוואה: מבנים אמיתיים, עם רחוב ושנת בנייה.</p>
+  <div class="real" id="real"></div>
+  <p class="source-note">פרטי המבנים מבוססים על שמות קובצי המקור, בצירוף מקורות משלימים המקושרים בכיתובים. שנת הבנייה אינה תאריך הצילום. טווחים, מחלוקות וייחוסים שלא אומתו מסומנים במפורש. בית בלדר נכלל להשוואה מתוך הקבצים שנמסרו, ואינו דוגמה טיפוסית לסגנון הבין־לאומי של שנות ה־30.</p>
+</div></section>
+
+<section id="reply"><div class="wrap">
+  <div class="answer">
+    <h2>על העבודה שלי</h2>
+    <p>בעקבות <span class="en">Babylonian Vision</span> של נורה אל-בדרי, שבה מרחב לטנטי משמש לערער על ארכיון קולוניאלי, בחרתי לא להמציא עוד מבנים אלא לחשוף מה המודל חושב שהעיר הלבנה היא. 20 הרצות זהות של אותו פרומפט, מול תצלומים אמיתיים, מראות איזה חלק מהעיר הפך לקלישאה ואיזה נעלם. היצירה לא מחקה את אל-בדרי אלא עונה לה: היא שואלת מה קורה כשהארכיון הוא לא אוסף מוזיאוני אלא הממוצע הסטטיסטי של האינטרנט.</p>
+  </div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <span class="en">Antonio Somaini, “Latent Spaces: AI, Art, and the Archive”, October 196 (Spring 2026), pp. 18–60. doi.org/10.1162/OCTO.a.545</span>
+</div></footer>
+
+<dialog id="dlg"><button type="button" id="close">סגירה</button><img id="big" alt=""></dialog>
+
+<script>
+var EXT = "jpg";
+var REAL = [
+  {
+    file:"בית בלדר,רחוב ביאליק 23 תוכנן ונבנה על ידי שמואל בלדר,שעלה ווינה נבנה בשנת 1925.jpg",
+    name:"בית בלדר", address:"ביאליק 23, תל אביב", year:"1925", architect:"שמואל בלדר (לפי שם הקובץ)",
+    note:"מקורות משלימים מציינים גם את אמיל טיינר. המבנה בעל מאפיינים אקלקטיים.",
+    source:"https://makom.hamoreshet.org.il/landmark/balder-house-tel-aviv-yafo/"
+  },
+  {
+    file:"בית ליבלינג, אידלסון 29, נבנה בשנת 1936, אדריכל דב כרמי.jpg.webp",
+    name:"בית ליבלינג", address:"אידלסון 29, תל אביב", year:"1936", architect:"דב כרמי",
+    source:"https://shimur.org/sites/415115/"
+  },
+  {
+    file:"בית פולישוק, כיכר מגן-דוד, אדריכלים שלמה ליאסקובסקי ויעקב אורנשטיין, 1934..jpg",
+    name:"בית פולישוק", address:"אלנבי 62, פינת נחלת בנימין 1, כיכר מגן דוד, תל אביב", year:"1934", architect:"שלמה ליאסקובסקי ויעקב אורנשטיין",
+    source:"https://golden-lotus.co.il/polishuk/"
+  },
+  {
+    file:"בית אהרונוביץ', שדרות רוטשילד 117, אדריכל יצחק רפפורט, 1933..jpg",
+    name:"בית אהרונוביץ׳", address:"שדרות רוטשילד 117, תל אביב", year:"1933", architect:"יצחק רפפורט",
+    source:"https://golden-lotus.co.il/rotchild117/"
+  },
+  {
+    file:"\"בית האונייה\", אדריכל שמעון חמדי-לוי, 1935..jpg",
+    name:"בית האונייה", address:"לבנדה 56, תל אביב", year:"1935", architect:"שמעון חמדי־לוי (לפי שם הקובץ; הייחוס אינו ודאי)",
+    note:"זהות המתכנן שנויה במחלוקת. במחקר המקושר חמדי־לוי מתואר ככל הנראה כקבלן.",
+    source:"https://michaelarch.wordpress.com/2019/06/11/סיבוב-בבית-האוניה-בלבנדה-56/"
+  },
+  {
+    file:"בניין בפינת רחוב מרמורק ושדרות רוטשילד, מול כיכר הבימה. אדריכל- דב כרמי, 1935.jpg",
+    name:"הבניין בפינת מרמורק ושדרות רוטשילד", address:"פינת רחוב מרמורק ושדרות רוטשילד, מול כיכר הבימה, תל אביב",
+    year:"1935", architect:"דב כרמי",
+    note:"הפרטים מופיעים גם בכיתוב התמונה המקושר; לא אומתו מול תיק בניין.",
+    source:"https://he.wikipedia.org/wiki/פורטל:תל_אביב-יפו/העיר_הלבנה/11"
+  },
+  {
+    file:"בית ביגלמן, רחוב שלמה המלך 11 פינת רחוב תל חי, אדריכל א. כבירי, 1934..jpg",
+    name:"בית ביגלמן", address:"שלמה המלך 11, פינת תל חי, תל אביב", year:"1934", architect:"א. כבירי",
+    note:"הפרטים מופיעים גם בכיתוב התמונה המקושר; ראשי התיבות נשמרו כפי שנמסרו.",
+    source:"https://he.wikipedia.org/wiki/פורטל:תל_אביב-יפו/העיר_הלבנה/29"
+  },
+  {
+    file:"\"בית התרמומטר\", רחוב פרוג, אדריכל יהודה ליולקא..jpg",
+    name:"בית התרמומטר", address:"פרוג 5, תל אביב", year:"1935–1936", yearNote:"לפי מקור משני", architect:"יהודה ליולקא",
+    note:"המקור מציג את שתי השנים בלי הבחנה ברורה בין תכנון לסיום הבנייה; התאריך לא אומת במקור ראשוני.",
+    source:"https://architectuul.com/architecture/thermometer-house"
+  }
+];
+var ARTWORKS = [
+  {file:"images-1.jpg", caption:"דימוי פיסולי שסופק לצורך השיעור; שם היצירה, שנתה והשיוך לסדרה טרם אומתו."},
+  {file:"images.jpg", caption:"דימוי כלי שסופק לצורך השיעור; שם היצירה, שנתה והשיוך לסדרה טרם אומתו."},
+  {file:"inverted-4-1600x900.png", caption:"דימוי כלים שסופק לצורך השיעור; שם היצירה, שנתה והשיוך לסדרה טרם אומתו."},
+  {
+    file:"Untitled_Nefertiti_print.webp",
+    caption:"נורה אל־בדרי, דימוי נפרטיטי המופיע בפרויקט Disentangled, 2017. עבודה נפרדת מ־Babylonian Vision.",
+    source:"https://www.nora-al-badri.de/works-index#disentangled"
+  }
+];
+var GEN = [];
+for (var i = 1; i <= 20; i++) GEN.push("images/gen-" + (i < 10 ? "0" : "") + i + "." + EXT);
+
+var dlg = document.getElementById("dlg"), big = document.getElementById("big");
+function openPhoto(src, alt){
+  big.src = src; big.alt = alt; dlg.showModal();
+}
+function photo(src, alt){
+  var b = document.createElement("button");
+  b.type = "button"; b.className = "photo"; b.setAttribute("aria-label", "הגדלת " + alt);
+  var im = new Image(); im.alt = alt; im.loading = "lazy"; im.src = src;
+  b.appendChild(im);
+  b.onclick = function(){ openPhoto(src, alt); };
+  return b;
+}
+
+/* hero: stacking k images each at opacity 1/k gives their exact average */
+var stack = document.getElementById("stack");
+var layers = GEN.map(function(src){
+  var im = new Image(); im.src = src; im.alt = ""; stack.appendChild(im); return im;
+});
+function setStack(n){
+  layers.forEach(function(im, k){ im.style.opacity = k < n ? 1 / (k + 1) : 0; });
+  document.getElementById("nlabel").textContent = n;
+}
+document.getElementById("n").addEventListener("input", function(e){ setStack(+e.target.value); });
+setStack(20);
+
+/* original work image */
+var orig = document.getElementById("original");
+orig.appendChild(photo("images/artwork/Nora-Al-Badri_Babylonian_Vision_video_still_c_Al-Badri-1-1920x1233.webp", "Babylonian Vision, Nora Al-Badri, 2020"));
+var artworks = document.getElementById("artworks");
+ARTWORKS.forEach(function(item){
+  var f = document.createElement("figure");
+  var fr = document.createElement("div"); fr.className = "frame";
+  fr.appendChild(photo("images/artwork/" + encodeURIComponent(item.file), item.caption));
+  var cap = document.createElement("figcaption"); cap.textContent = item.caption;
+  if (item.source) {
+    var source = document.createElement("a"); source.href = item.source; source.textContent = "מקור: אתר האמנית";
+    cap.appendChild(document.createTextNode(" ")); cap.appendChild(source);
+  }
+  f.appendChild(fr); f.appendChild(cap); artworks.appendChild(f);
+});
+
+/* grid + lightbox */
+var g = document.getElementById("grid20");
+GEN.forEach(function(src, k){
+  var b = document.createElement("button");
+  b.type = "button"; b.className = "cell"; b.setAttribute("aria-label", "הגדלת תמונה " + (k + 1));
+  var im = new Image(); im.src = src; im.alt = "תמונה " + (k + 1) + " מתוך 20"; im.loading = "lazy";
+  b.appendChild(im);
+  b.onclick = function(){ openPhoto(src, im.alt); };
+  g.appendChild(b);
+});
+document.getElementById("close").onclick = function(){ dlg.close(); };
+dlg.addEventListener("click", function(e){ if (e.target === dlg) dlg.close(); });
+
+/* real photos */
+var r = document.getElementById("real");
+REAL.forEach(function(item){
+  var f = document.createElement("figure");
+  var fr = document.createElement("div"); fr.className = "frame";
+  fr.appendChild(photo("images/real/" + encodeURIComponent(item.file), item.name + " — " + item.address));
+  var cap = document.createElement("figcaption");
+  var name = document.createElement("strong"); name.textContent = item.name; cap.appendChild(name);
+  cap.appendChild(document.createTextNode("\nכתובת: " + item.address + "\nשנת בנייה: "));
+  var year = document.createElement("bdi"); year.dir = "ltr"; year.textContent = item.year; cap.appendChild(year);
+  if (item.yearNote) cap.appendChild(document.createTextNode(" (" + item.yearNote + ")"));
+  cap.appendChild(document.createTextNode("\nאדריכל/ים: " + item.architect));
+  if (item.note) cap.appendChild(document.createTextNode("\n" + item.note));
+  if (item.source) {
+    var source = document.createElement("a"); source.href = item.source; source.textContent = "מקור לפרטים";
+    cap.appendChild(document.createTextNode("\n")); cap.appendChild(source);
+  }
+  f.appendChild(fr); f.appendChild(cap); r.appendChild(f);
+});
+</script>
+</body>
+</html>
